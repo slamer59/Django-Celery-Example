@@ -6,23 +6,25 @@ This is a simple example about integrating Celery in Django website, it uses cel
 ![image](https://raw.githubusercontent.com/sunshineatnoon/Django-Celery-Example/master/images/1.png)
 
 
-# Dependecies
+# Dependencies
 
-* Celery 3.1.19
+* Celery 4.2.1
 * Django 1.9
-* RabbitMQ 3.5.6
+* RabbitMQ 3.5.6 or Redis 2.4.5
 
 # How to run:
-
+You are advised to create a special environnement to test it !
 ```
   git clone https://github.com/sunshineatnoon/Django-Celery-Example.git
   cd Django-Celery-Example
+  pip install -r requirements.txt
   /usr/local/sbin/rabbitmq-server
   celery -A celery_try worker -l info
   python manage.py makemigrations
   python manage.py migrate
   python manage.py runserver
 ```
+You could change rabbitmq-server by redis-server
 
 Then visit [http://127.0.0.1:8000/index/](http://127.0.0.1:8000/index/).
 
@@ -33,3 +35,10 @@ See my [blog post](http://sunshineatnoon.github.io/How-to-create-a-progressbar-i
 # Known Issue:
 
 Works well on firefox and chrome, but doesn't work on safari.
+Works on [windows with eventlet](https://stackoverflow.com/a/47331438/4989371) :
+```
+pip install eventlet
+celery -A celery_try worker -l info -P eventlet
+``` 
+ 
+

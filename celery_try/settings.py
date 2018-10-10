@@ -1,3 +1,4 @@
+# coding: utf8
 """
 Django settings for celery_try project.
 
@@ -27,11 +28,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-BROKER_URL = 'amqp://guest:guest@localhost//'
+# BROKER_URL = 'amqp://guest:guest@localhost//'
+BROKER_URL = 'redis://localhost:6379/0'
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
-
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 # Application definition
 
 INSTALLED_APPS = (
