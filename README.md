@@ -30,7 +30,8 @@ Then visit [http://127.0.0.1:8000/index/](http://127.0.0.1:8000/index/).
 
 # Technical Details: 
 
-See my [blog post](http://sunshineatnoon.github.io/How-to-create-a-progressbar-in-Django/).
+See my [blog post](https://sunshineafternoonweb.wordpress.com/2017/01/30/first-blog-post/)
+or [annother resource](https://buildwithdjango.com/blog/post/celery-progress-bars/).
 
 # Known Issue:
 
