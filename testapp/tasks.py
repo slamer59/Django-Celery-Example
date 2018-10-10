@@ -1,3 +1,4 @@
+# coding: utf8
 from celery import shared_task,current_task
 from numpy import random
 from scipy.fftpack import fft

@@ -1,11 +1,14 @@
-from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
-from django.core.urlresolvers import reverse
-from django.template import loader
-from .forms import UserForm
-from .tasks import add,fft_random
-from celery.result import AsyncResult
+# coding: utf8
 import json
+
+from celery.result import AsyncResult
+from django.core.urlresolvers import reverse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render
+
+from .forms import UserForm
+from .tasks import fft_random
+
 
 # Create your views here.
 def poll_state(request):
@@ -24,16 +27,17 @@ def poll_state(request):
     json_data = json.dumps(data)
     return HttpResponse(json_data, content_type='application/json')
 
+
 def index(request):
     if 'job' in request.GET:
         job_id = request.GET['job']
         job = AsyncResult(job_id)
         data = job.result or job.state
         context = {
-            'data':data,
-            'task_id':job_id,
+            'data': data,
+            'task_id': job_id,
         }
-        return render(request,"show_t.html",context)
+        return render(request, "show_t.html", context)
     elif 'n' in request.GET:
         n = request.GET['n']
         job = fft_random.delay(int(n))
@@ -41,6 +45,6 @@ def index(request):
     else:
         form = UserForm()
         context = {
-            'form':form,
+            'form': form,
         }
-        return render(request,"post_form.html",context)
+        return render(request, "post_form.html", context)
